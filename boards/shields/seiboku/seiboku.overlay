@@ -2,17 +2,8 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 / {
-    /* 1. 軸(Axis)を独立したノードとして定義する（必須） */
-    trackball_x: trackball_x {
-        compatible = "zephyr,input-axis";
-        input-code = <INPUT_REL_X>;
-    };
-
-    trackball_y: trackball_y {
-        compatible = "zephyr,input-axis";
-        input-code = <INPUT_REL_Y>;
-    };
-
+    /* サブノード方式がエラーになったので、削除またはコメントアウト */
+    
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
@@ -48,9 +39,9 @@
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 5)>, // D5 (SCLK)
-                    <NRF_PSEL(SPIM_MOSI, 0, 4)>, // D4 (SDIO)
-                    <NRF_PSEL(SPIM_MISO, 0, 4)>; // D4 (SDIO)
+            psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 4)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 4)>;
         };
     };
 
@@ -70,24 +61,22 @@
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
-    cs-gpios = <&gpio1 12 GPIO_ACTIVE_LOW>; // 修正：D7は gpio1 12 です
+    cs-gpios = <&gpio1 12 GPIO_ACTIVE_LOW>; // D7
 
     trackball: trackball@0 {
         status = "okay";
         compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
-        /* 修正：D10は gpio1 15 です */
-        motion-gpios = <&gpio1 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; 
+        motion-gpios = <&gpio1 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; // D10
         
-        /* 修正：定数ではなく、上記で定義したノードのポインタを指定 */
-        zephyr,axis-x = <&trackball_x>;
-        zephyr,axis-y = <&trackball_y>;
+        /* 修正：エラーの指示通り、数値(INPUT_REL_X/Y)を直接入れます */
+        zephyr,axis-x = <INPUT_REL_X>;
+        zephyr,axis-y = <INPUT_REL_Y>;
         
-        /* 修正：cpi ではなく res-cpi (ドライバによりますが res-cpi が一般的) */
         res-cpi = <600>;
-        /* PMW3610ドライバでの軸反転プロパティ */
         invert-x;
+        /* invert-y; も必要ならここに追加 */
     };
 };
 
