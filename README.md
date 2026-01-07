@@ -10,7 +10,7 @@ Seeed Studio XIAO nRF52840 を採用し、BLE での接続をサポートして�
 
 1. [Releases](https://github.com/snize/zmk-seiboku-example/releases) から最新のファームウェア `seiboku-seeeduino_xiao_ble-zmk.uf2` をダウンロードしてください。
 2. PC と XIAO nRF52840 を USB ケーブルで接続します。
-3. XIAO nRF52840 のリセットボタンを素早く2回押してブートローダーモードにします。
+3. XIAO nRF52840 のリセットボタンを素早く2回押してブートローダーモードにします。あ
 4. 各OSに合わせたファイラが開くので、ダウンロードしたファームウェアをドラッグ＆ドロップしてください。
 5. 以上でファームウェアの書き込みが完了します。
 
