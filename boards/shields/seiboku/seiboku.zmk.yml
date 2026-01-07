@@ -2,8 +2,8 @@ file_format: "1"
 id: seiboku
 name: SEIBOKU
 type: shield
-url: https://github.com/snize/zmk-seiboku-example
-requires: [seeed_xiao]
+url: https://github.com/Raito5963/seibokutest
+requires: [seeed_xiao_ble]
 features:
   - keys
-  - pointer
+  - pointing
