@@ -3,19 +3,4 @@ if SHIELD_SEIBOKU
 config ZMK_KEYBOARD_NAME
     default "SEIBOKU"
 
-config INPUT
-    default y
-
-config INPUT_NRFX_SPIM
-    default y
-
-config PMW3610
-    default y
-
-config SPI
-    default y
-
-config ZMK_POINTING
-    default y
-
 endif
